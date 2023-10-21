@@ -37,6 +37,7 @@ type SectionProps = PropsWithChildren<{
 
 
 function App(): JSX.Element {
+console.log('test for git');
 
   return (
       <RootAppNavigationStack />
