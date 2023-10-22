@@ -4,62 +4,104 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
 import type { PropsWithChildren } from 'react';
 import {
-    SafeAreaView,
-    ScrollView,
-    StatusBar,
+    Appearance,
     StyleSheet,
     Text,
     TouchableOpacity,
-    useColorScheme,
-    View,
 } from 'react-native';
 
-import {
-    Colors,
-    DebugInstructions,
-    Header,
-    LearnMoreLinks,
-    ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
 import { HomeStackParamList } from '../../navigation/navigation';
 import { Screen } from '../../components/defaultUI';
+import { useActions, useAppTheme } from '../../hooks';
+import { AppThemeEnum } from '../../types/app/app';
 
 type SectionProps = PropsWithChildren<{
     title: string;
 }>;
 
-
-type homeScreenProp = StackNavigationProp<HomeStackParamList, 'Test'>;
+type HomeScreenProp = StackNavigationProp<HomeStackParamList, 'HomeScreen'>;
 
 export const HomeScreen: React.FC = (): JSX.Element => {
-    const isDarkMode = useColorScheme() === 'dark';
-    const navigation = useNavigation<homeScreenProp>()
-
-    const backgroundStyle = {
-        backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-    };
+    const navigation = useNavigation<HomeScreenProp>()
+    const { colors } = useAppTheme()
+    const { changeAppTheme, changeAppIsUsedSystemTheme } = useActions()
+    console.log('colors', colors);
 
     return (
         <Screen >
-                <View
+            <>
+                <TouchableOpacity
                     style={{
-                        backgroundColor: isDarkMode ? Colors.black : Colors.white,
+                        height: 50,
+                        backgroundColor: colors.notification,
+                        justifyContent: 'center',
+                        alignItems: 'center',
                     }}
+                    onPress={() => navigation.navigate('Test2')}
                 >
-                    <TouchableOpacity
-                        style={{
-                            height: 50,
-                            backgroundColor: 'magenta',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                        }}
-                        onPress={() => navigation.navigate('Test2')}
-                    >
-                        <Text>
-                            ПЕРЕЙТИ на TEST 2
-                        </Text>
-                    </TouchableOpacity>
-                </View>
+                    <Text>
+                        ПЕРЕЙТИ на TEST 2
+                    </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                    style={{
+                        height: 50,
+                        backgroundColor: colors.notification,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        marginTop: 10,
+                    }}
+                    onPress={() => changeAppTheme(AppThemeEnum.light)}
+                >
+                    <Text>
+                        Change theme to LIGHT
+                    </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={{
+                        height: 50,
+                        backgroundColor: colors.notification,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        marginTop: 10,
+                    }}
+                    onPress={() => changeAppTheme(AppThemeEnum.dark)}
+                >
+                    <Text>
+                        Change theme to DARK
+                    </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={{
+                        height: 50,
+                        backgroundColor: colors.notification,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        marginTop: 10,
+                    }}
+                    onPress={() => changeAppIsUsedSystemTheme(true)}
+                >
+                    <Text>
+                        🟢 USE  SYSTEM THEME
+                    </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={{
+                        height: 50,
+                        backgroundColor: colors.notification,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        marginTop: 10,
+                    }}
+                    onPress={() => changeAppIsUsedSystemTheme(false)}
+                >
+                    <Text>
+                        🔴 NOT USE  SYSTEM THEME
+                    </Text>
+                </TouchableOpacity>
+
+            </>
         </Screen>
     );
 }

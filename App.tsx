@@ -1,66 +1,33 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
 
-import React from 'react';
-import type { PropsWithChildren } from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import React, { useEffect } from 'react';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-import { HomeScreen } from './src/screens/Home/HomeScreen'
+import { Provider } from 'react-redux';
+
 import { RootAppNavigationStack } from './src/navigation/navigation';
-
-
-
-
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-
+import { store } from './src/store/store';
+import { Appearance } from 'react-native';
+import { useActions, useTypedSelector } from './src/hooks';
+import { WrapperAppScren } from './WrapperAppScreen';
 
 function App(): JSX.Element {
-console.log('test for git');
+
+  // const { changeAppTheme } = useActions()
+
+  // useEffect(() => {
+  //   const coloTheme = Appearance.getColorScheme()
+  //   console.log('coloTheme', coloTheme);
+  //   changeAppTheme(coloTheme)
+  // }, [])
 
   return (
-      <RootAppNavigationStack />
+    <React.StrictMode>
+      <Provider store={store}>
+        {/* <WrapperAppScren> */}
+          <RootAppNavigationStack />
+        {/* </WrapperAppScren> */}
+      </Provider>
+    </React.StrictMode>
   );
 }
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 
 export default App;

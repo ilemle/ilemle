@@ -1,6 +1,8 @@
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import {
   ProfileScreen,
@@ -8,16 +10,15 @@ import {
   Test2
 } from '../screens'
 
-
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-
 //Базовый роут навигации
 export const RootAppNavigationStack = () => {
+
   return (
-    <NavigationContainer>
-      <BottomTabs />
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <BottomTabs />
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }
 
@@ -25,7 +26,7 @@ export const RootAppNavigationStack = () => {
 const Tabs = createBottomTabNavigator();
 const BottomTabs = () => {
   return (
-    <Tabs.Navigator>
+    <Tabs.Navigator screenOptions={{ headerShown: false }}>
       <Tabs.Screen name="Home" component={HomeScreenStack} />
       <Tabs.Screen name="ProfileScreenStack" component={ProfileScreenStack} />
     </Tabs.Navigator>
@@ -35,15 +36,15 @@ const BottomTabs = () => {
 
 //Стек домашней страницы
 export type HomeStackParamList = {
-  Test: undefined;
+  HomeScreen: undefined;
   Test2: undefined;
 };
 const HomeStack = createNativeStackNavigator<HomeStackParamList>();
 const HomeScreenStack = () => {
 
   return (
-    <HomeStack.Navigator>
-      <HomeStack.Screen name="Test" component={HomeScreen} />
+    <HomeStack.Navigator screenOptions={{ headerBackVisible: false, headerShown: false }}>
+      <HomeStack.Screen name="HomeScreen" component={HomeScreen} />
       <HomeStack.Screen name="Test2" component={Test2} />
     </HomeStack.Navigator>
 

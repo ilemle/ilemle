@@ -1,5 +1,10 @@
-import { useTheme } from './useTheme'
+import { useAppTheme } from './useAppTheme'
+import {useActions  } from './useActions'
+import {useTypedSelector  } from './useTypedSelector'
 
 export {
-    useTheme
+    useAppTheme,
+    useActions,
+    useTypedSelector,
 }
+ 

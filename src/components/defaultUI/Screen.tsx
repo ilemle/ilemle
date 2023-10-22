@@ -1,16 +1,15 @@
 
 import React from "react";
 import {
-    SafeAreaView,
     StatusBar,
     StyleProp,
     StyleSheet,
+    View,
     ViewStyle
 } from "react-native";
-import { useTheme } from "../../hooks";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-
-// export type Constructor<T> = new (...args: any[]) => T;
+import { useAppTheme } from "../../hooks";
 interface IScreenComponent {
     children: JSX.Element | null,
     style?: StyleProp<ViewStyle>
@@ -21,10 +20,19 @@ interface IScreenComponent {
 export const Screen: React.FC<IScreenComponent> = (props: IScreenComponent): JSX.Element => {
     const { children, statusBarIsVisible } = props
 
-    const colors = useTheme()
+    const insets = useSafeAreaInsets()
+    const { colors } = useAppTheme()
 
     return (
-        <SafeAreaView style={[style.container, { backgroundColor: colors.primary }]}>
+        <View
+            style={[style.container, {
+                backgroundColor: colors.primary,
+                paddingTop: insets.top,
+                paddingBottom: insets.bottom,
+                paddingLeft: insets.left,
+                paddingRight: insets.right,
+            }]}
+        >
             {
                 statusBarIsVisible &&
                 <StatusBar
@@ -33,13 +41,15 @@ export const Screen: React.FC<IScreenComponent> = (props: IScreenComponent): JSX
                     backgroundColor={'red'}
                 />
             }
+
             {children}
-        </SafeAreaView>
+        </View>
     )
 }
 
 const style = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+
     }
 })
