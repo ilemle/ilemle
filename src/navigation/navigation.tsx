@@ -13,6 +13,7 @@ import {
 //Базовый роут навигации
 export const RootAppNavigationStack = () => {
 
+  
   return (
     <SafeAreaProvider>
       <NavigationContainer>

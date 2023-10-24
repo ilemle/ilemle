@@ -10,7 +10,7 @@ interface appState {
 
 const initialState: appState = {
     appTheme: AppThemeEnum.dark,
-    appThemeUsedSystemTheme: true,
+    appThemeUsedSystemTheme: false,
 }
 
 export const appSlice = createSlice({

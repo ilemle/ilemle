@@ -1,18 +1,17 @@
 
+import { colors as _colors } from "../assets/colors/colors";
 import { useColorScheme } from "react-native";
-import { colors as _colors } from "../colors/colors";
-import { AppThemeEnum } from "../types/app";
-import { useActions } from "./useActions";
 import { useTypedSelector } from "./useTypedSelector";
 
 export const useAppTheme = () => {
-    console.log('useAppTheme custom hook is used 🟣');
 
-    const { appTheme } = useTypedSelector((state) => state.app)
+    const systemColorScheme = useColorScheme() || 'light'
 
+    const { appTheme: theme, appThemeUsedSystemTheme } = useTypedSelector(state => state.app)
 
-    const colors = _colors[appTheme]
+    const _theme = appThemeUsedSystemTheme ? systemColorScheme : theme
 
+    const colors = _colors[_theme]
 
     return { colors }
 }
