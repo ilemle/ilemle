@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useRef } from "react";
 import {
     StatusBar,
     StyleProp,
@@ -18,15 +18,20 @@ interface IScreenComponent {
 }
 
 export const Screen: React.FC<IScreenComponent> = (props: IScreenComponent): JSX.Element => {
-    const { children, statusBarIsVisible } = props
+    const {
+        children,
+        statusBarIsVisible = true
+    } = props
 
     const insets = useSafeAreaInsets()
-    const { colors } = useAppTheme()
+    const { colors, theme } = useAppTheme()
+
+    const isDark = theme === 'dark' ? 'dark-content' : 'light-content'
 
     return (
         <View
             style={[style.container, {
-                backgroundColor: colors.primary,
+                backgroundColor: colors.background.default,
                 paddingTop: insets.top,
                 paddingBottom: insets.bottom,
                 paddingLeft: insets.left,
@@ -36,9 +41,12 @@ export const Screen: React.FC<IScreenComponent> = (props: IScreenComponent): JSX
             {
                 statusBarIsVisible &&
                 <StatusBar
-                    hidden={true}
-                    barStyle={'dark-content'}
-                    backgroundColor={'red'}
+                
+                    // hidden={true}
+                    networkActivityIndicatorVisible
+                    barStyle={isDark}
+
+
                 />
             }
 

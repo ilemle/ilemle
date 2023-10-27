@@ -2,6 +2,7 @@
 import { colors as _colors } from "../assets/colors/colors";
 import { useColorScheme } from "react-native";
 import { useTypedSelector } from "./useTypedSelector";
+import { useMemo } from "react";
 
 export const useAppTheme = () => {
 
@@ -11,7 +12,14 @@ export const useAppTheme = () => {
 
     const _theme = appThemeUsedSystemTheme ? systemColorScheme : theme
 
-    const colors = _colors[_theme]
+    const colors = useMemo(() => {
+        return _colors[_theme]
+    }, [systemColorScheme, appThemeUsedSystemTheme, theme])
 
-    return { colors }
+
+
+    return {
+        colors,
+        theme: _theme
+    }
 }

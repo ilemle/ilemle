@@ -8,6 +8,7 @@ import {
     ViewStyle
 } from "react-native";
 import { Typography } from "./Typography";
+import { useAppTheme } from "../../hooks";
 
 interface ICustomSwitchProps {
     isEnabled: boolean,
@@ -27,6 +28,8 @@ export const CustomSwitch: React.FC<ICustomSwitchProps> = (props: ICustomSwitchP
         containerStyle,
     } = props
 
+    const { colors } = useAppTheme()
+
     const [_isEnabled, setIsEnabled] = useState(isEnabled);
     const toggleSwitch = () => {
         onValueChange()
@@ -39,8 +42,8 @@ export const CustomSwitch: React.FC<ICustomSwitchProps> = (props: ICustomSwitchP
                 {description}
             </Typography>
             <Switch
-                trackColor={{ false: '#767577', true: '#81b0ff' }}
-                thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
+                trackColor={{ false: colors.switch.disableBackground, true: colors.switch.activeBackground }}
+                thumbColor={isEnabled ? colors.switch.active : colors.switch.disable}
                 disabled={disabled}
                 ios_backgroundColor="#3e3e3e"
                 onValueChange={toggleSwitch}

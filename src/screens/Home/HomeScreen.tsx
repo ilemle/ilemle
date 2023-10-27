@@ -1,12 +1,14 @@
 
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import React from 'react';
+import React, { useState } from 'react';
 import type { PropsWithChildren } from 'react';
 import {
     Appearance,
+    ScrollView,
     StyleSheet,
     Text,
+    TextInput,
     TouchableOpacity,
     View,
     ViewProps,
@@ -67,6 +69,12 @@ export const HomeScreen: React.FC = (): JSX.Element => {
                 containerStyle={styles.themeSwitcher}
             />
 
+          
+                {/* <ScrollView > */}
+                    <View style={{ backgroundColor: 'lime', height: 1000, marginHorizontal: 50 }} />
+                {/* </ScrollView> */}
+  
+
         </Screen>
     );
 }
@@ -75,7 +83,7 @@ const styles = StyleSheet.create({
 
     themeSwitcher: {
         paddingHorizontal: 20,
-        paddingVertical:10,
+        paddingVertical: 10,
     },
 
     sectionContainer: {

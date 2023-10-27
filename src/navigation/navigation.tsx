@@ -9,11 +9,14 @@ import {
   HomeScreen,
   Test2
 } from '../screens'
+import { useAppTheme } from '../hooks';
+import { Text, TouchableOpacity, View } from 'react-native';
+import { CustomTabBar } from './CustomTabBar';
 
 //Базовый роут навигации
 export const RootAppNavigationStack = () => {
 
-  
+
   return (
     <SafeAreaProvider>
       <NavigationContainer>
@@ -23,14 +26,32 @@ export const RootAppNavigationStack = () => {
   );
 }
 
+
 //Нижняя навигация по разделам
 const Tabs = createBottomTabNavigator();
 const BottomTabs = () => {
+  const { colors } = useAppTheme()
   return (
-    <Tabs.Navigator screenOptions={{ headerShown: false }}>
+    <Tabs.Navigator
+      screenOptions={{
+        headerShown: false,
+        tabBarActiveTintColor: colors.accent,
+        // tabBarActiveBackgroundColor: colors.background.default,
+        tabBarStyle: {
+          backgroundColor: 'gray',
+          width: 300,
+          // columnGap: 3,
+
+        },
+        headerBackgroundContainerStyle: { backgroundColor: 'red' }
+
+      }}
+      tabBar={props => <CustomTabBar {...props} />}
+    >
       <Tabs.Screen name="Home" component={HomeScreenStack} />
-      <Tabs.Screen name="ProfileScreenStack" component={ProfileScreenStack} />
-    </Tabs.Navigator>
+      <Tabs.Screen name="Home2" component={HomeScreenStack} />
+      <Tabs.Screen name="Profile" component={ProfileScreenStack} />
+    </Tabs.Navigator >
   );
 }
 
@@ -44,7 +65,14 @@ const HomeStack = createNativeStackNavigator<HomeStackParamList>();
 const HomeScreenStack = () => {
 
   return (
-    <HomeStack.Navigator screenOptions={{ headerBackVisible: false, headerShown: false }}>
+    <HomeStack.Navigator
+      screenOptions={{
+        headerBackVisible: false,
+        headerShown: false,
+
+      }}
+
+    >
       <HomeStack.Screen name="HomeScreen" component={HomeScreen} />
       <HomeStack.Screen name="Test2" component={Test2} />
     </HomeStack.Navigator>
@@ -60,7 +88,12 @@ const ProfileStack = createNativeStackNavigator<ProfileStackParamList>();
 const ProfileScreenStack = () => {
 
   return (
-    <ProfileStack.Navigator>
+    <ProfileStack.Navigator
+      screenOptions={{
+        headerBackVisible: false,
+        headerShown: false
+      }}
+    >
       <ProfileStack.Screen name="ProfileScreen" component={ProfileScreen} />
     </ProfileStack.Navigator>
 
