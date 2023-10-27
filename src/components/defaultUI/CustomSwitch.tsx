@@ -24,7 +24,7 @@ export const CustomSwitch: React.FC<ICustomSwitchProps> = (props: ICustomSwitchP
         isEnabled = false,
         onValueChange,
         disabled,
-        description,
+        description = '',
         containerStyle,
     } = props
 
@@ -32,14 +32,15 @@ export const CustomSwitch: React.FC<ICustomSwitchProps> = (props: ICustomSwitchP
 
     const [_isEnabled, setIsEnabled] = useState(isEnabled);
     const toggleSwitch = () => {
-        onValueChange()
         setIsEnabled(previousState => !previousState);
+        onValueChange()
     }
 
     return (
         <View style={[styles.container, containerStyle]}>
             <Typography>
                 {description}
+                { ' '+ isEnabled.toString()}
             </Typography>
             <Switch
                 trackColor={{ false: colors.switch.disableBackground, true: colors.switch.activeBackground }}

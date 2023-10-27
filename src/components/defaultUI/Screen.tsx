@@ -26,7 +26,7 @@ export const Screen: React.FC<IScreenComponent> = (props: IScreenComponent): JSX
     const insets = useSafeAreaInsets()
     const { colors, theme } = useAppTheme()
 
-    const isDark = theme === 'dark' ? 'dark-content' : 'light-content'
+    const isDark = theme === 'dark' ? 'light-content' : 'dark-content'
 
     return (
         <View
@@ -41,7 +41,7 @@ export const Screen: React.FC<IScreenComponent> = (props: IScreenComponent): JSX
             {
                 statusBarIsVisible &&
                 <StatusBar
-                
+
                     // hidden={true}
                     networkActivityIndicatorVisible
                     barStyle={isDark}

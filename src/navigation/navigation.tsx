@@ -49,7 +49,7 @@ const BottomTabs = () => {
       tabBar={props => <CustomTabBar {...props} />}
     >
       <Tabs.Screen name="Home" component={HomeScreenStack} />
-      <Tabs.Screen name="Home2" component={HomeScreenStack} />
+      <Tabs.Screen name='Camera' component={CameraScreenStack} />
       <Tabs.Screen name="Profile" component={ProfileScreenStack} />
     </Tabs.Navigator >
   );
@@ -59,7 +59,6 @@ const BottomTabs = () => {
 //Стек домашней страницы
 export type HomeStackParamList = {
   HomeScreen: undefined;
-  Test2: undefined;
 };
 const HomeStack = createNativeStackNavigator<HomeStackParamList>();
 const HomeScreenStack = () => {
@@ -74,8 +73,29 @@ const HomeScreenStack = () => {
 
     >
       <HomeStack.Screen name="HomeScreen" component={HomeScreen} />
-      <HomeStack.Screen name="Test2" component={Test2} />
     </HomeStack.Navigator>
+
+  )
+}
+
+//Для теста, название тоже для теста
+export type CameraStackList = {
+  Test2: undefined;
+};
+const CameraStack = createNativeStackNavigator<CameraStackList>();
+const CameraScreenStack = () => {
+
+  return (
+    <CameraStack.Navigator
+      screenOptions={{
+        headerBackVisible: false,
+        headerShown: false,
+
+      }}
+
+    >
+      <CameraStack.Screen name="Test2" component={Test2} />
+    </CameraStack.Navigator>
 
   )
 }

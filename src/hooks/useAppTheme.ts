@@ -12,9 +12,10 @@ export const useAppTheme = () => {
 
     const _theme = appThemeUsedSystemTheme ? systemColorScheme : theme
 
-    const colors = useMemo(() => {
-        return _colors[_theme]
-    }, [systemColorScheme, appThemeUsedSystemTheme, theme])
+    // const colors = useMemo(() => {
+    //     return _colors[_theme]
+    // }, [systemColorScheme, appThemeUsedSystemTheme, theme])
+    const colors = _colors[_theme]
 
 
 

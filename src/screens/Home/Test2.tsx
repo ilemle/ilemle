@@ -8,7 +8,7 @@ import {
     TouchableOpacity,
 } from 'react-native';
 
-import { HomeStackParamList } from '../../navigation/navigation';
+import { CameraStackList } from '../../navigation/navigation';
 import { useNavigation } from '@react-navigation/native';
 import { Screen } from '../../components/defaultUI';
 
@@ -16,30 +16,28 @@ type SectionProps = PropsWithChildren<{
     title: string;
 }>;
 
-type homeScreenProp = StackNavigationProp<HomeStackParamList, 'Test2'>;
+type homeScreenProp = StackNavigationProp<CameraStackList, 'Test2'>;
 
 export const Test2 = (): JSX.Element => {
     const navigation = useNavigation<homeScreenProp>()
 
     return (
         <Screen>
-            <>
-                <Text> IS 2 SCREEN</Text>
+            <Text> IS 2 SCREEN</Text>
 
-                <TouchableOpacity
-                    style={{
-                        height: 50,
-                        backgroundColor: 'magenta',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                    }}
-                    onPress={() => navigation.goBack()}
-                >
-                    <Text>
-                        BACK
-                    </Text>
-                </TouchableOpacity>
-            </>
+            <TouchableOpacity
+                style={{
+                    height: 50,
+                    backgroundColor: 'magenta',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                }}
+                onPress={() => navigation.goBack()}
+            >
+                <Text>
+                    BACK
+                </Text>
+            </TouchableOpacity>
         </Screen>
     );
 }

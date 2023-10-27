@@ -9,11 +9,11 @@ import { store } from './src/store/store';
 function App(): JSX.Element {
 
   return (
-    <React.StrictMode>
+    // <React.StrictMode>
       <Provider store={store}>
         <RootAppNavigationStack />
       </Provider>
-    </React.StrictMode>
+    // </React.StrictMode>
   );
 }
 

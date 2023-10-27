@@ -1,5 +1,7 @@
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
+import Animated, { useSharedValue } from "react-native-reanimated";
+
 import { Typography } from "../components/defaultUI/Typography";
 import { useAppTheme } from "../hooks";
 
@@ -12,6 +14,8 @@ export const CustomTabBar: React.FC = (props): JSX.Element => {
     } = props
 
     const { colors } = useAppTheme()
+
+
 
     return (
         <View style={{
@@ -33,6 +37,7 @@ export const CustomTabBar: React.FC = (props): JSX.Element => {
                 const isFocused = state.index === index;
 
                 const onPress = () => {
+                 
                     const event = navigation.emit({
                         type: 'tabPress',
                         target: route.key,
@@ -70,7 +75,7 @@ export const CustomTabBar: React.FC = (props): JSX.Element => {
                         }}
                     >
 
-
+                        
                         <Typography style={{ color: isFocused ? colors.tabBar.selectedText : colors.tabBar.disabledText }}>
                             {label}
                         </Typography>
