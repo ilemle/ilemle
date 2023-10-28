@@ -1,43 +1,71 @@
 import React from "react";
-import { Text, TouchableOpacity, View } from "react-native";
-import Animated, { useSharedValue } from "react-native-reanimated";
+import { View, } from "react-native";
+import { BottomTabBarProps } from '@react-navigation/bottom-tabs/src/types'
 
-import { Typography } from "../components/defaultUI/Typography";
 import { useAppTheme } from "../hooks";
+import { CustomTabBarItem } from "./CustomTabBarItem";
+import { IconsType } from "../assets/icons";
+import Animated, { FadeInDown } from "react-native-reanimated";
 
-export const CustomTabBar: React.FC = (props): JSX.Element => {
+const getBottomTab = (stateIndex: number) => {
+    if (stateIndex === 0) {
+        return 'menu'
+    }
+    if (stateIndex === 1) {
+        return 'home'
+    }
+    if (stateIndex === 2) {
+        return 'user'
+    }
+    return 'home'
+}
+
+export const CustomTabBar: React.FC<BottomTabBarProps> = (props): JSX.Element => {
 
     const {
         state,
         descriptors,
-        navigation
+        navigation,
+        insets
     } = props
 
     const { colors } = useAppTheme()
 
-
-
     return (
-        <View style={{
-            flexDirection: 'row',
-            height: 60,
-            // borderTopLeftRadius: 25,
-            backgroundColor: colors.tabBar.background
-        }}
+        <Animated.View
+            entering={FadeInDown.delay(100).duration(1000).springify()}
+            style={[
+                {
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    height: 60,
+                    borderRadius: 25,
+                    marginHorizontal: 10,
+                    paddingHorizontal: 20,
+                    // marginBottom: insets.bottom, 
+                    backgroundColor: colors.tabBar.background,
+
+                    // если захочется плавающий tabbar, над контентом
+                    position: 'absolute',
+                    bottom: insets.bottom,
+                    right: insets.right,
+                    left: insets.left,
+                    //
+                },
+            ]
+            }
         >
             {state.routes.map((route, index) => {
                 const { options } = descriptors[route.key];
-                const label =
-                    options.tabBarLabel !== undefined
-                        ? options.tabBarLabel
-                        : options.title !== undefined
-                            ? options.title
-                            : route.name;
+
+                const label: string = route.name
 
                 const isFocused = state.index === index;
 
+                const iconName: IconsType = getBottomTab(index)
+
+
                 const onPress = () => {
-                 
                     const event = navigation.emit({
                         type: 'tabPress',
                         target: route.key,
@@ -57,32 +85,19 @@ export const CustomTabBar: React.FC = (props): JSX.Element => {
                 };
 
                 return (
-                    <TouchableOpacity
-                        key={index}
-                        accessibilityRole="button"
-                        accessibilityState={isFocused ? { selected: true } : {}}
-                        accessibilityLabel={options.tabBarAccessibilityLabel}
-                        testID={options.tabBarTestID}
+                    <CustomTabBarItem
+                        key={index + label}
+                        isFocused={isFocused}
+                        options={options}
                         onPress={onPress}
                         onLongPress={onLongPress}
-                        style={{
-                            flex: 1,
-                            alignItems: 'center',
-                            backgroundColor: colors.tabBar.background,
-                            padding: 20,
-                            borderRadius: 15,
-                            marginHorizontal: 10,
-                        }}
-                    >
-
-                        
-                        <Typography style={{ color: isFocused ? colors.tabBar.selectedText : colors.tabBar.disabledText }}>
-                            {label}
-                        </Typography>
-
-                    </TouchableOpacity>
+                        label={label}
+                        iconName={iconName}
+                    />
                 );
             })}
-        </View>
+        </Animated.View>
     );
 }
+
+

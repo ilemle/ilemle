@@ -22,6 +22,10 @@ const light = {
         background: '#ffffff',
         selectedText: '#ff3399',
         disabledText: '#222'
+    },
+    icon: {
+        active: '#ff3399',
+        disabled: '#333333',
     }
 };
 
@@ -52,6 +56,10 @@ const dark = {
         background: 'lightgray',
         selectedText: '#673ab7',
         disabledText: '#222',
+    },
+    icon: {
+        active: '#673ab7',
+        disabled: '#767577',
     }
 };
 

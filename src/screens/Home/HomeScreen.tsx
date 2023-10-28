@@ -13,13 +13,25 @@ import {
     View,
     ViewProps,
 } from 'react-native';
+import Animated, {
+    FadeInUp,
+    useAnimatedProps,
+    useAnimatedStyle,
+    useSharedValue,
+    withDecay,
+    withDelay,
+    withSpring,
+    withTiming
+} from 'react-native-reanimated';
+import { Circle, Svg } from 'react-native-svg'
 
 import { HomeStackParamList } from '../../navigation/navigation';
 import { Screen } from '../../components/defaultUI';
 import { useActions, useAppTheme, useTypedSelector } from '../../hooks';
 import { AppThemeEnum } from '../../types/app/app';
 import { CustomSwitch } from '../../components/defaultUI/CustomSwitch';
-import Animated, { useAnimatedStyle, useSharedValue, withDecay, withDelay, withSpring } from 'react-native-reanimated';
+import { Typography } from '../../components/defaultUI/Typography';
+
 
 type SectionProps = PropsWithChildren<{
     title: string;
@@ -45,16 +57,6 @@ export const HomeScreen: React.FC = (): JSX.Element => {
         changeAppTheme(AppThemeEnum.dark)
     }
 
-    const translateX = useSharedValue(100)
-    const handlePress = () => {
-        // translateX.value = withSpring(translateX.value + 50, { duration: 5000, velocity: 1000 });
-        translateX.value += 50;
-    };
-
-    const animatedStyles = useAnimatedStyle(() => ({
-        transform: [{ translateX: withSpring(translateX.value ) }],
-    }));
-
     return (
         <Screen >
 
@@ -63,6 +65,7 @@ export const HomeScreen: React.FC = (): JSX.Element => {
                 isEnabled={appThemeUsedSystemTheme}
                 onValueChange={setIsSystemTheme}
                 containerStyle={styles.themeSwitcher}
+                animationEntering={FadeInUp.delay(100).duration(1000).springify()}
             />
             <CustomSwitch
                 description={' Светлая тема'}
@@ -70,6 +73,7 @@ export const HomeScreen: React.FC = (): JSX.Element => {
                 isEnabled={theme === AppThemeEnum.light}
                 onValueChange={setLightTheme}
                 containerStyle={styles.themeSwitcher}
+                animationEntering={FadeInUp.delay(200).duration(1000).springify()}
             />
             <CustomSwitch
                 description={'Темная тема'}
@@ -77,30 +81,10 @@ export const HomeScreen: React.FC = (): JSX.Element => {
                 isEnabled={theme === AppThemeEnum.dark}
                 onValueChange={setDarkTheme}
                 containerStyle={styles.themeSwitcher}
+                animationEntering={FadeInUp.delay(300).duration(1000).springify()}
             />
 
-            <TouchableOpacity onPress={handlePress} style={{ justifyContent: 'center', alignItems: 'center' }}>
-
-                <Animated.View
-                    style={[
-                        {
-                            width: 100,
-                            height: 100,
-                            backgroundColor: 'violet',
-                        },
-                        animatedStyles
-                    ]}>
-
-                </Animated.View>
-            </TouchableOpacity>
-            <TouchableOpacity style={{ height: 50, width: 50, backgroundColor: 'red', }} onPress={() => { translateX.value = 50 }} />
-
-
-            {/* <ScrollView > */}
-            <View style={{ backgroundColor: 'lime', height: 1000, marginHorizontal: 50 }} />
-            {/* </ScrollView> */}
-
-
+          
         </Screen>
     );
 }

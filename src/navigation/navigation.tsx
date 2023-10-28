@@ -33,23 +33,33 @@ const BottomTabs = () => {
   const { colors } = useAppTheme()
   return (
     <Tabs.Navigator
+
+      tabBar={props => <CustomTabBar {...props} />}
+      initialRouteName='Home'
+      sceneContainerStyle={{ backgroundColor: colors.background.default }}
+
       screenOptions={{
         headerShown: false,
+        tabBarHideOnKeyboard: true,
         tabBarActiveTintColor: colors.accent,
         // tabBarActiveBackgroundColor: colors.background.default,
         tabBarStyle: {
           backgroundColor: 'gray',
           width: 300,
-          // columnGap: 3,
-
+          alignItems: 'center',
+          justifyContent: 'center',
         },
-        headerBackgroundContainerStyle: { backgroundColor: 'red' }
+
+        headerStyle: { backgroundColor: colors.background.default },
+        tabBarInactiveBackgroundColor: 'pink',
+        tabBarBadgeStyle: { backgroundColor: 'red' },
 
       }}
-      tabBar={props => <CustomTabBar {...props} />}
+
+
     >
-      <Tabs.Screen name="Home" component={HomeScreenStack} />
       <Tabs.Screen name='Camera' component={CameraScreenStack} />
+      <Tabs.Screen name="Home" component={HomeScreenStack} />
       <Tabs.Screen name="Profile" component={ProfileScreenStack} />
     </Tabs.Navigator >
   );
