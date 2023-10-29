@@ -1,12 +1,11 @@
 import React from "react";
-import { Platform, View, } from "react-native";
+import { Platform} from "react-native";
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs/src/types'
 
 import { useAppTheme } from "../hooks";
 import { CustomTabBarItem } from "./CustomTabBarItem";
 import { IconsType } from "../assets/icons";
-import Animated, { FadeInDown } from "react-native-reanimated";
-import { LayoutAnimatedView } from "../components/defaultUI/LayoutAnimatedView";
+import { LayoutAnimatedView } from "../components/defaultUI";
 
 const getBottomTab = (stateIndex: number) => {
     if (stateIndex === 0) {
@@ -34,17 +33,17 @@ export const CustomTabBar: React.FC<BottomTabBarProps> = (props): JSX.Element =>
 
     return (
         <LayoutAnimatedView
-            // entering={ }
             style={[
                 {
                     flexDirection: 'row',
                     justifyContent: 'space-between',
+                    alignItems: 'center',
                     height: 60,
                     borderRadius: 25,
                     marginHorizontal: 10,
                     paddingHorizontal: 20,
                     // marginBottom: insets.bottom, 
-                    backgroundColor: colors.tabBar.background,
+                    backgroundColor: colors.TabBar.background,
 
                     // если захочется плавающий tabbar, над контентом
                     position: 'absolute',

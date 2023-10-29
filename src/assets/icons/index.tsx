@@ -41,7 +41,7 @@ export default function Icon({
     <SvgXml
       testID={testID}
       style={style}
-      xml={icons[name](size, disabled ? colors.icon.disabled : color || colors.icon.active)}
+      xml={icons[name](size, disabled ? colors.Icon.disabled : color || colors.Icon.active)}
       width={size}
       height={size}
     />

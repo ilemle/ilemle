@@ -1,36 +1,20 @@
 
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import React, { useState } from 'react';
+import React from 'react';
 import type { PropsWithChildren } from 'react';
 import {
-    Appearance,
-    ScrollView,
     StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
-    ViewProps,
 } from 'react-native';
-import Animated, {
+import {
     FadeInUp,
-    useAnimatedProps,
-    useAnimatedStyle,
-    useSharedValue,
-    withDecay,
-    withDelay,
-    withSpring,
-    withTiming
 } from 'react-native-reanimated';
-import { Circle, Svg } from 'react-native-svg'
 
 import { HomeStackParamList } from '../../navigation/navigation';
 import { Screen } from '../../components/defaultUI';
 import { useActions, useAppTheme, useTypedSelector } from '../../hooks';
 import { AppThemeEnum } from '../../types/app/app';
-import { CustomSwitch } from '../../components/defaultUI/CustomSwitch';
-import { Typography } from '../../components/defaultUI/Typography';
+import { CustomSwitch } from '../../components/defaultUI';
 
 
 type SectionProps = PropsWithChildren<{

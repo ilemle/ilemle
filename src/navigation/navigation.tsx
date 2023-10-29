@@ -10,7 +10,6 @@ import {
   MenuScreen
 } from '../screens'
 import { useAppTheme } from '../hooks';
-import { Text, TouchableOpacity, View } from 'react-native';
 import { CustomTabBar } from './CustomTabBar';
 
 //Базовый роут навигации
@@ -36,21 +35,15 @@ const BottomTabs = () => {
 
       tabBar={props => <CustomTabBar {...props} />}
       initialRouteName='Home'
-      sceneContainerStyle={{ backgroundColor: colors.background.default }}
+      sceneContainerStyle={{ backgroundColor: colors.Background.default }}
 
       screenOptions={{
         headerShown: false,
         tabBarHideOnKeyboard: true,
         tabBarActiveTintColor: colors.accent,
-        // tabBarActiveBackgroundColor: colors.background.default,
-        tabBarStyle: {
-          backgroundColor: 'gray',
-          width: 300,
-          alignItems: 'center',
-          justifyContent: 'center',
-        },
+        tabBarStyle: {},
 
-        headerStyle: { backgroundColor: colors.background.default },
+        headerStyle: { backgroundColor: colors.Background.default },
         tabBarInactiveBackgroundColor: 'pink',
         tabBarBadgeStyle: { backgroundColor: 'red' },
 

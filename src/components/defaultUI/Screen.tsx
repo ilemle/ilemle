@@ -31,7 +31,7 @@ export const Screen: React.FC<IScreenComponent> = (props: IScreenComponent): JSX
     return (
         <View
             style={[style.container, {
-                backgroundColor: colors.background.default,
+                backgroundColor: colors.Background.default,
                 paddingTop: insets.top,
                 paddingLeft: insets.left,
                 paddingRight: insets.right,

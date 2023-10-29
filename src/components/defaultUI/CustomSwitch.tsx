@@ -47,8 +47,8 @@ export const CustomSwitch: React.FC<ICustomSwitchProps> = (props: ICustomSwitchP
                 {description}
             </Typography>
             <Switch
-                trackColor={{ false: colors.switch.disableBackground, true: colors.switch.activeBackground }}
-                thumbColor={isEnabled ? colors.switch.active : colors.switch.disable}
+                trackColor={{ false: colors.Switch.disableBackground, true: colors.Switch.activeBackground }}
+                thumbColor={isEnabled ? colors.Switch.active : colors.Switch.disable}
                 disabled={disabled}
                 ios_backgroundColor="#3e3e3e"
                 onValueChange={toggleSwitch}

@@ -12,7 +12,7 @@ interface IAnimatedView {
     exiting?: exitingType
 }
 
-export const LayoutAnimatedView = (props: IAnimatedView) => {
+export const LayoutAnimatedView: React.FC<IAnimatedView> = (props: IAnimatedView): JSX.Element => {
 
     const { layoutAnimationEnabled } = useTypedSelector(state => state.app)
 

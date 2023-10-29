@@ -1,65 +1,72 @@
 const light = {
-    text: {
-        default: 'rgb(51, 51, 51)', // Темный серый цвет
-    },
-    background: {
-        default: '#f0f0f0', // Светло-серый фон
-    },
-    switch: {
-        active: '#ff3399',
-        disable: '#f4f3f4',
-        activeBackground: '#81b0ff',
-        disableBackground: '#767577',
-
-    },
     primary: '#0099cc', // Более яркий синий цвет
     secondary: '#ff6600', // Более яркий оранжевый цвет
     border: 'rgb(199, 199, 204)',
     base: '#000000', // Черный цвет
     notification: '#66ff66', // Светло-зеленый цвет
     accent: '#ff3399', // Розовый акцент
-    tabBar: {
+    Text: {
+        default: 'rgb(51, 51, 51)', // Темный серый цвет
+        inverted: '#767577'
+    },
+    Background: {
+        default: '#f0f0f0', // Светло-серый фон
+    },
+    Switch: {
+        active: '#ff3399',
+        disable: '#f4f3f4',
+        activeBackground: '#81b0ff',
+        disableBackground: '#767577',
+
+    },
+    TabBar: {
         background: '#ffffff',
         selectedText: '#ff3399',
         disabledText: '#222'
     },
-    icon: {
+    Icon: {
         active: '#ff3399',
         disabled: '#333333',
+    },
+    Button: {
+        active: 'pink'
     }
 };
 
 //fffacc
 const dark = {
-
-    text: {
-        default: '#e0e0e0', // Светло-серый цвет
-    },
-    background: {
-        default: '#333333', // Темно-серый фон
-    },
-
-    switch: {
-        active: '#f5dd4b',
-        disable: '#f4f3f4',
-        activeBackground: '#81b0ff',
-        disableBackground: '#767577',
-    },
-
     primary: '#007acc', // Синий цвет
     secondary: '#ffa500', // Оранжевый цвет
     border: 'rgb(199, 199, 204)',
     base: '#ffffff', // Белый цвет
     notification: '#33cc33', // Ярко-зеленый цвет
-    accent: '#f5dd4b',
-    tabBar: {
+    accent: '#673ab7',
+
+    Text: {
+        default: '#e0e0e0', // Светло-серый цвет
+        inverted: '#767577',
+    },
+    Background: {
+        default: '#333333', // Темно-серый фон
+    },
+
+    Switch: {
+        active: '#f5dd4b',
+        disable: '#f4f3f4',
+        activeBackground: '#81b0ff',
+        disableBackground: '#767577',
+    },
+    TabBar: {
         background: 'lightgray',
         selectedText: '#673ab7',
         disabledText: '#222',
     },
-    icon: {
+    Icon: {
         active: '#673ab7',
         disabled: '#767577',
+    },
+    Button: {
+        active: '#fffacc'
     }
 };
 
