@@ -3,16 +3,19 @@ import React from 'react';
 import { Provider } from 'react-redux';
 
 import { RootAppNavigationStack } from './src/navigation/navigation';
-import { store } from './src/store/store';
+import { persistor, store } from './src/store/store';
+import { PersistGate } from 'redux-persist/integration/react';
 
 
 function App(): JSX.Element {
 
   return (
     // <React.StrictMode>
-      <Provider store={store}>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
         <RootAppNavigationStack />
-      </Provider>
+      </PersistGate>
+    </Provider>
     // </React.StrictMode>
   );
 }

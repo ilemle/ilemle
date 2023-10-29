@@ -3,14 +3,12 @@ import {
     StyleProp,
     StyleSheet,
     Switch,
-    View,
-    ViewProps,
     ViewStyle
 } from "react-native";
 import { Typography } from "./Typography";
 import { useAppTheme } from "../../hooks";
-import Animated, { BaseAnimationBuilder, EntryExitAnimationFunction, FadeInUp } from "react-native-reanimated";
-import { ReanimatedKeyframe } from "react-native-reanimated/lib/typescript/reanimated2/layoutReanimation/animationBuilder/Keyframe";
+import { LayoutAnimatedView } from "./LayoutAnimatedView";
+import { enteringType } from "../../types/animationTypes";
 
 interface ICustomSwitchProps {
     isEnabled: boolean,
@@ -18,7 +16,7 @@ interface ICustomSwitchProps {
     disabled?: boolean,
     description?: string,
     containerStyle?: StyleProp<ViewStyle>,
-    animationEntering?:BaseAnimationBuilder | typeof BaseAnimationBuilder | EntryExitAnimationFunction | ReanimatedKeyframe;
+    animationEntering?: enteringType
 }
 
 export const CustomSwitch: React.FC<ICustomSwitchProps> = (props: ICustomSwitchProps): JSX.Element => {
@@ -26,7 +24,7 @@ export const CustomSwitch: React.FC<ICustomSwitchProps> = (props: ICustomSwitchP
     const {
         isEnabled = false,
         onValueChange,
-        disabled,
+        disabled = false,
         description = '',
         containerStyle,
         animationEntering,
@@ -41,8 +39,8 @@ export const CustomSwitch: React.FC<ICustomSwitchProps> = (props: ICustomSwitchP
     }
 
     return (
-        <Animated.View
-        entering={animationEntering}
+        <LayoutAnimatedView
+            entering={animationEntering}
             style={[styles.container, containerStyle]}
         >
             <Typography>
@@ -56,7 +54,7 @@ export const CustomSwitch: React.FC<ICustomSwitchProps> = (props: ICustomSwitchP
                 onValueChange={toggleSwitch}
                 value={isEnabled}
             />
-        </Animated.View>
+        </LayoutAnimatedView>
 
     )
 }

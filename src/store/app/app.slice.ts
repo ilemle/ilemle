@@ -6,11 +6,13 @@ import { AppThemeEnum } from "../../types/app"
 interface appState {
     appTheme: AppThemeEnum
     appThemeUsedSystemTheme: boolean,
+    layoutAnimationEnabled: boolean,
 }
 
 const initialState: appState = {
     appTheme: AppThemeEnum.dark,
     appThemeUsedSystemTheme: false,
+    layoutAnimationEnabled: true,
 }
 
 export const appSlice = createSlice({
@@ -22,6 +24,9 @@ export const appSlice = createSlice({
         },
         changeAppIsUsedSystemTheme: (state: appState, { payload }) => {
             state.appThemeUsedSystemTheme = payload
+        },
+        changeLayoutAnimationEnabled: (state: appState) => {
+            state.layoutAnimationEnabled = !state.layoutAnimationEnabled
         }
     }
 })

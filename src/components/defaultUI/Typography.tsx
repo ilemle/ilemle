@@ -4,7 +4,7 @@ import { StyleProp, Text, TextStyle } from "react-native";
 import { useAppTheme } from "../../hooks";
 
 interface ITypographyProps {
-    children?: string | string[] | never[] | undefined
+    children?: React.ReactNode
     style?: StyleProp<TextStyle>
 }
 

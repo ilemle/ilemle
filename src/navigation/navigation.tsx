@@ -7,7 +7,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import {
   ProfileScreen,
   HomeScreen,
-  Test2
+  MenuScreen
 } from '../screens'
 import { useAppTheme } from '../hooks';
 import { Text, TouchableOpacity, View } from 'react-native';
@@ -58,9 +58,9 @@ const BottomTabs = () => {
 
 
     >
-      <Tabs.Screen name='Camera' component={CameraScreenStack} />
-      <Tabs.Screen name="Home" component={HomeScreenStack} />
-      <Tabs.Screen name="Profile" component={ProfileScreenStack} />
+      <Tabs.Screen name='Menu' component={MenuScreenStack} />
+      <Tabs.Screen name='Home' component={HomeScreenStack} />
+      <Tabs.Screen name='Profile' component={ProfileScreenStack} />
     </Tabs.Navigator >
   );
 }
@@ -89,14 +89,14 @@ const HomeScreenStack = () => {
 }
 
 //Для теста, название тоже для теста
-export type CameraStackList = {
-  Test2: undefined;
+export type MenuStackList = {
+  MenuScreen: undefined;
 };
-const CameraStack = createNativeStackNavigator<CameraStackList>();
-const CameraScreenStack = () => {
+const MenuStack = createNativeStackNavigator<MenuStackList>();
+const MenuScreenStack = () => {
 
   return (
-    <CameraStack.Navigator
+    <MenuStack.Navigator
       screenOptions={{
         headerBackVisible: false,
         headerShown: false,
@@ -104,8 +104,8 @@ const CameraScreenStack = () => {
       }}
 
     >
-      <CameraStack.Screen name="Test2" component={Test2} />
-    </CameraStack.Navigator>
+      <MenuStack.Screen name="MenuScreen" component={MenuScreen} />
+    </MenuStack.Navigator>
 
   )
 }

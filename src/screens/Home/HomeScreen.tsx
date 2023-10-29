@@ -43,8 +43,15 @@ export const HomeScreen: React.FC = (): JSX.Element => {
     const navigation = useNavigation<HomeScreenProp>()
     const { theme } = useAppTheme()
 
-    const { appThemeUsedSystemTheme } = useTypedSelector(state => state.app)
-    const { changeAppTheme, changeAppIsUsedSystemTheme } = useActions()
+    const {
+        appThemeUsedSystemTheme,
+        layoutAnimationEnabled
+    } = useTypedSelector(state => state.app)
+    const {
+        changeAppTheme,
+        changeAppIsUsedSystemTheme,
+        changeLayoutAnimationEnabled
+    } = useActions()
 
     const setIsSystemTheme = () => {
         changeAppIsUsedSystemTheme(!appThemeUsedSystemTheme)
@@ -55,6 +62,9 @@ export const HomeScreen: React.FC = (): JSX.Element => {
     }
     const setDarkTheme = () => {
         changeAppTheme(AppThemeEnum.dark)
+    }
+    const setLayoutAnimationEnabled = () => {
+        changeLayoutAnimationEnabled()
     }
 
     return (
@@ -83,8 +93,15 @@ export const HomeScreen: React.FC = (): JSX.Element => {
                 containerStyle={styles.themeSwitcher}
                 animationEntering={FadeInUp.delay(300).duration(1000).springify()}
             />
+            <CustomSwitch
+                description={'Системные анимации включены'}
+                isEnabled={layoutAnimationEnabled}
+                onValueChange={setLayoutAnimationEnabled}
+                containerStyle={styles.themeSwitcher}
+                animationEntering={FadeInUp.delay(400).duration(1000).springify()}
+            />
 
-          
+
         </Screen>
     );
 }

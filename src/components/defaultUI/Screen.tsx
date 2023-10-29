@@ -11,7 +11,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { useAppTheme } from "../../hooks";
 interface IScreenComponent {
-    children: JSX.Element | JSX.Element[] | null,
+    children: React.ReactNode,
     style?: StyleProp<ViewStyle>
     statusBarIsVisible?: boolean,
 
