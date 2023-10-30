@@ -21,7 +21,7 @@ interface ICustomTabBarItem {
     iconName: IconsType,
 }
 
-const Y_OFFSET = 5
+const Y_OFFSET = 3
 const AnimatedTouchableOpacity = Animated.createAnimatedComponent(TouchableOpacity)
 
 export const CustomTabBarItem = (props: ICustomTabBarItem) => {
@@ -67,7 +67,6 @@ export const CustomTabBarItem = (props: ICustomTabBarItem) => {
             onLongPress={onLongPress}
             style={[
                 styles.container,
-                { backgroundColor: colors.TabBar.background },
                 animatedStyles,
             ]}
         >
@@ -88,6 +87,8 @@ export const CustomTabBarItem = (props: ICustomTabBarItem) => {
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
+        width: 70,
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 25,

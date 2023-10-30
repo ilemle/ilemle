@@ -40,12 +40,12 @@ const BottomTabs = () => {
       screenOptions={{
         headerShown: false,
         tabBarHideOnKeyboard: true,
-        tabBarActiveTintColor: colors.accent,
+        // tabBarActiveTintColor: colors.accent,
         tabBarStyle: {},
 
-        headerStyle: { backgroundColor: colors.Background.default },
-        tabBarInactiveBackgroundColor: 'pink',
-        tabBarBadgeStyle: { backgroundColor: 'red' },
+        // headerStyle: { backgroundColor: colors.Background.default },
+        // tabBarInactiveBackgroundColor: 'pink',
+        // tabBarBadgeStyle: { backgroundColor: 'red' },
 
       }}
 
@@ -71,9 +71,11 @@ const HomeScreenStack = () => {
       screenOptions={{
         headerBackVisible: false,
         headerShown: false,
-
+        // headerTransparent: true,
+        // headerStyle: {
+        //   backgroundColor: 'transparent'
+        // }
       }}
-
     >
       <HomeStack.Screen name="HomeScreen" component={HomeScreen} />
     </HomeStack.Navigator>

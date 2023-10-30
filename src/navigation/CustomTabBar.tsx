@@ -1,5 +1,5 @@
 import React from "react";
-import { Platform} from "react-native";
+import { Platform } from "react-native";
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs/src/types'
 
 import { useAppTheme } from "../hooks";

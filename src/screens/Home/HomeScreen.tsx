@@ -1,7 +1,7 @@
 
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import React from 'react';
+import React, { useCallback } from 'react';
 import type { PropsWithChildren } from 'react';
 import {
     StyleSheet,
@@ -37,19 +37,21 @@ export const HomeScreen: React.FC = (): JSX.Element => {
         changeLayoutAnimationEnabled
     } = useActions()
 
-    const setIsSystemTheme = () => {
+    const setIsSystemTheme = useCallback(() => {
         changeAppIsUsedSystemTheme(!appThemeUsedSystemTheme)
-    }
+    }, [appThemeUsedSystemTheme])
 
-    const setLightTheme = () => {
+    const setLightTheme = useCallback(() => {
         changeAppTheme(AppThemeEnum.light)
-    }
-    const setDarkTheme = () => {
+    }, [theme])
+
+    const setDarkTheme = useCallback(() => {
         changeAppTheme(AppThemeEnum.dark)
-    }
-    const setLayoutAnimationEnabled = () => {
+    }, [theme])
+
+    const setLayoutAnimationEnabled = useCallback(() => {
         changeLayoutAnimationEnabled()
-    }
+    }, [layoutAnimationEnabled])
 
     return (
         <Screen >
@@ -84,7 +86,6 @@ export const HomeScreen: React.FC = (): JSX.Element => {
                 containerStyle={styles.themeSwitcher}
                 animationEntering={FadeInUp.delay(400).duration(1000).springify()}
             />
-
 
         </Screen>
     );

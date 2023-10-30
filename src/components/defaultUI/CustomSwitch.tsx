@@ -38,6 +38,17 @@ export const CustomSwitch: React.FC<ICustomSwitchProps> = (props: ICustomSwitchP
         onValueChange()
     }
 
+    const thumbColor = disabled && !isEnabled ?
+        colors.Switch.disableAndInactive : isEnabled ?
+            colors.Switch.enableAndActive : colors.Switch.disable
+
+    const trackColor = {
+        false: colors.Switch.disableBackground,
+        true: disabled ?
+            colors.Switch.enable :
+            colors.Switch.activeBackground
+    }
+
     return (
         <LayoutAnimatedView
             entering={animationEntering}
@@ -47,8 +58,8 @@ export const CustomSwitch: React.FC<ICustomSwitchProps> = (props: ICustomSwitchP
                 {description}
             </Typography>
             <Switch
-                trackColor={{ false: colors.Switch.disableBackground, true: colors.Switch.activeBackground }}
-                thumbColor={isEnabled ? colors.Switch.active : colors.Switch.disable}
+                trackColor={trackColor }
+                thumbColor={thumbColor}
                 disabled={disabled}
                 ios_backgroundColor="#3e3e3e"
                 onValueChange={toggleSwitch}

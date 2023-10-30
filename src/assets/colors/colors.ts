@@ -13,11 +13,12 @@ const light = {
         default: '#f0f0f0', // Светло-серый фон
     },
     Switch: {
-        active: '#ff3399',
-        disable: '#f4f3f4',
+        disable: '#f4f3f4',      //для свича в положении 'false'
+        disableAndInactive: 'gray',     //для отключенного свича, который в положении 'false'
+        enable: 'rgb(100,120,154)',                 //для свича в положении 'true'
+        enableAndActive: '#ff3399',        //для включенного свича, который в положении 'true'
         activeBackground: '#81b0ff',
         disableBackground: '#767577',
-
     },
     TabBar: {
         background: '#ffffff',
@@ -51,8 +52,10 @@ const dark = {
     },
 
     Switch: {
-        active: '#f5dd4b',
-        disable: '#f4f3f4',
+        disable: '#f4f3f4',      //для свича в положении 'false'
+        disableAndInactive: 'gray',     //для отключенного свича, который в положении 'false'
+        enable: 'rgb(100,120,154)',                 //для свича в положении 'true'
+        enableAndActive: '#f5dd4b',        //для включенного свича, который в положении 'true'
         activeBackground: '#81b0ff',
         disableBackground: '#767577',
     },

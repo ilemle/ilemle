@@ -1,5 +1,5 @@
 
-import React, { useRef } from "react";
+import React from "react";
 import {
     StatusBar,
     StyleProp,
@@ -13,14 +13,13 @@ import { useAppTheme } from "../../hooks";
 interface IScreenComponent {
     children: React.ReactNode,
     style?: StyleProp<ViewStyle>
-    statusBarIsVisible?: boolean,
-
+    statusBarHidden?: boolean,
 }
 
 export const Screen: React.FC<IScreenComponent> = (props: IScreenComponent): JSX.Element => {
     const {
         children,
-        statusBarIsVisible = true
+        statusBarHidden = false,
     } = props
 
     const insets = useSafeAreaInsets()
@@ -35,20 +34,16 @@ export const Screen: React.FC<IScreenComponent> = (props: IScreenComponent): JSX
                 paddingTop: insets.top,
                 paddingLeft: insets.left,
                 paddingRight: insets.right,
-                // paddingBottom: insets.bottom,
             }]}
         >
-            {
-                statusBarIsVisible &&
-                <StatusBar
+            <StatusBar
+                hidden={statusBarHidden} //полностью скрывает статус бар
+                backgroundColor={colors.Background.default} // Android only
+                networkActivityIndicatorVisible
+                barStyle={isDark}
+            // showHideTransition={'none'} // ios only 
 
-                    // hidden={true}
-                    networkActivityIndicatorVisible
-                    barStyle={isDark}
-
-
-                />
-            }
+            />
 
             {children}
         </View>
