@@ -7,10 +7,12 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import {
   ProfileScreen,
   HomeScreen,
-  MenuScreen
+  MenuScreen,
+  ArtDetailScreen,
 } from '../screens'
 import { useAppTheme } from '../hooks';
 import { CustomTabBar } from './CustomTabBar';
+import { ArtNavigationParamsType, IProduct } from '../types/artApiTypes';
 
 //Базовый роут навигации
 export const RootAppNavigationStack = () => {
@@ -62,6 +64,7 @@ const BottomTabs = () => {
 //Стек домашней страницы
 export type HomeStackParamList = {
   HomeScreen: undefined;
+  ArtDetailScreen: ArtNavigationParamsType;
 };
 const HomeStack = createNativeStackNavigator<HomeStackParamList>();
 const HomeScreenStack = () => {
@@ -78,6 +81,7 @@ const HomeScreenStack = () => {
       }}
     >
       <HomeStack.Screen name="HomeScreen" component={HomeScreen} />
+      <HomeStack.Screen name="ArtDetailScreen" component={ArtDetailScreen} />
     </HomeStack.Navigator>
 
   )

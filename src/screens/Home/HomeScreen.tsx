@@ -1,119 +1,105 @@
 
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import type { PropsWithChildren } from 'react';
 import {
+    FlatList,
+    Image,
     StyleSheet,
+    TouchableOpacity,
 } from 'react-native';
-import {
+import Animated, {
     FadeInUp,
 } from 'react-native-reanimated';
+import axios from 'axios';
 
 import { HomeStackParamList } from '../../navigation/navigation';
-import { Screen } from '../../components/defaultUI';
+import { LayoutAnimatedView, Screen, Typography } from '../../components/defaultUI';
 import { useActions, useAppTheme, useTypedSelector } from '../../hooks';
 import { AppThemeEnum } from '../../types/app/app';
 import { CustomSwitch } from '../../components/defaultUI';
+import { ArtNavigationParamsType, IProduct } from '../../types/artApiTypes';
 
 
-type SectionProps = PropsWithChildren<{
-    title: string;
-}>;
 
-type HomeScreenProp = StackNavigationProp<HomeStackParamList, 'HomeScreen'>;
+type HomeScreenNavigationProp = StackNavigationProp<HomeStackParamList, 'HomeScreen'>;
 
 export const HomeScreen: React.FC = (): JSX.Element => {
-    const navigation = useNavigation<HomeScreenProp>()
+    const navigation = useNavigation<HomeScreenNavigationProp>()
     const { theme } = useAppTheme()
 
-    const {
-        appThemeUsedSystemTheme,
-        layoutAnimationEnabled
-    } = useTypedSelector(state => state.app)
-    const {
-        changeAppTheme,
-        changeAppIsUsedSystemTheme,
-        changeLayoutAnimationEnabled
-    } = useActions()
 
-    const setIsSystemTheme = useCallback(() => {
-        changeAppIsUsedSystemTheme(!appThemeUsedSystemTheme)
-    }, [appThemeUsedSystemTheme])
+    const [artWorks, setArtWorks] = useState<IProduct[]>([])
+    useEffect(() => {
+        const getArtworks = async () => {
+            try {
+                const result = await axios.get('https://api.artic.edu/api/v1/products?limit=10')
+                setArtWorks(result.data.data)
+            } catch (e) {
+                return e
+            }
+        }
+        getArtworks()
+    }, [])
 
-    const setLightTheme = useCallback(() => {
-        changeAppTheme(AppThemeEnum.light)
-    }, [theme])
+    const onPressImageArt = (props: ArtNavigationParamsType) => {
+        const {
+            id,
+            image_url,
+            title,
+            description,
+        } = props
 
-    const setDarkTheme = useCallback(() => {
-        changeAppTheme(AppThemeEnum.dark)
-    }, [theme])
-
-    const setLayoutAnimationEnabled = useCallback(() => {
-        changeLayoutAnimationEnabled()
-    }, [layoutAnimationEnabled])
+        navigation.navigate('ArtDetailScreen', {
+            id,
+            image_url,
+            title,
+            description,
+        });
+    }
+    console.log('artWorks 🍋', artWorks);
 
     return (
         <Screen >
 
-            <CustomSwitch
-                description={' Использовать системную тему'}
-                isEnabled={appThemeUsedSystemTheme}
-                onValueChange={setIsSystemTheme}
-                containerStyle={styles.themeSwitcher}
-                animationEntering={FadeInUp.delay(100).duration(1000).springify()}
-            />
-            <CustomSwitch
-                description={' Светлая тема'}
-                disabled={appThemeUsedSystemTheme}
-                isEnabled={theme === AppThemeEnum.light}
-                onValueChange={setLightTheme}
-                containerStyle={styles.themeSwitcher}
-                animationEntering={FadeInUp.delay(200).duration(1000).springify()}
-            />
-            <CustomSwitch
-                description={'Темная тема'}
-                disabled={appThemeUsedSystemTheme}
-                isEnabled={theme === AppThemeEnum.dark}
-                onValueChange={setDarkTheme}
-                containerStyle={styles.themeSwitcher}
-                animationEntering={FadeInUp.delay(300).duration(1000).springify()}
-            />
-            <CustomSwitch
-                description={'Системные анимации включены'}
-                isEnabled={layoutAnimationEnabled}
-                onValueChange={setLayoutAnimationEnabled}
-                containerStyle={styles.themeSwitcher}
-                animationEntering={FadeInUp.delay(400).duration(1000).springify()}
+
+
+            <FlatList
+                data={artWorks}
+                style={{ marginHorizontal: 10 }}
+                keyExtractor={(item) => item.id.toString()}
+                renderItem={({ item }) => {
+
+                    return (
+                        <TouchableOpacity
+                            onPress={() => onPressImageArt({
+                                id: item.id,
+                                image_url: item.image_url,
+                                title: item.title,
+                                description: item.description
+                            })}
+                        >
+                            <LayoutAnimatedView
+                                sharedTransitionTag={`image-${item.id}`}
+                                style={{ marginTop: 20, }}
+                            >
+                                <Image
+
+                                    style={{ height: 300, borderRadius: 15 }}
+                                    source={{ uri: item.image_url }}
+                                />
+                                <Typography style={{ marginTop: 5 }}>
+                                    {item.title}
+                                </Typography>
+                            </LayoutAnimatedView>
+                        </TouchableOpacity>
+                    )
+                }}
             />
 
         </Screen>
     );
 }
-
-const styles = StyleSheet.create({
-
-    themeSwitcher: {
-        paddingHorizontal: 20,
-        paddingVertical: 10,
-    },
-
-    sectionContainer: {
-        marginTop: 32,
-        paddingHorizontal: 24,
-    },
-    sectionTitle: {
-        fontSize: 24,
-        fontWeight: '600',
-    },
-    sectionDescription: {
-        marginTop: 8,
-        fontSize: 18,
-        fontWeight: '400',
-    },
-    highlight: {
-        fontWeight: '700',
-    },
-});
 
 
