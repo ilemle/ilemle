@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 import { AppThemeEnum } from "../../types/app"
 
 
@@ -19,10 +19,10 @@ export const appSlice = createSlice({
     name: 'app',
     initialState: initialState,
     reducers: {
-        changeAppTheme: (state: appState, { payload }) => {
+        changeAppTheme: (state: appState, { payload }: PayloadAction<AppThemeEnum>) => {
             state.appTheme = payload
         },
-        changeAppIsUsedSystemTheme: (state: appState, { payload }) => {
+        changeAppIsUsedSystemTheme: (state: appState, { payload }: PayloadAction<boolean>) => {
             state.appThemeUsedSystemTheme = payload
         },
         changeLayoutAnimationEnabled: (state: appState) => {

@@ -13,7 +13,7 @@ import { HomeStackParamList } from '../../navigation/navigation';
 import { LayoutAnimatedView, Screen, Typography } from '../../components/defaultUI';
 import { useActions, useAppTheme, useTypedSelector } from '../../hooks';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import Animated, { SlideInLeft } from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 
 type ArtDetailScreenNavigationProps = StackNavigationProp<HomeStackParamList, 'ArtDetailScreen'>;
 
@@ -51,7 +51,7 @@ export const ArtDetailScreen: React.FC<ArtDetailScreenProps> = ({ route }): JSX.
 
                 <Animated.View
                     style={{ marginTop: 20, marginHorizontal: 10 }}
-                    sharedTransitionTag={`image-${id}`}
+                    // sharedTransitionTag={`image-${id}`}
                 >
                     <Image
 
@@ -62,7 +62,7 @@ export const ArtDetailScreen: React.FC<ArtDetailScreenProps> = ({ route }): JSX.
                         {title}
                     </Typography>
                     <LayoutAnimatedView
-                        entering={SlideInLeft}
+                    // entering={SlideInLeft}
                     >
                         <Typography style={{ marginTop: 10 }}>
                             {

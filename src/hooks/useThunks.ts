@@ -1,15 +1,13 @@
 import { bindActionCreators } from "@reduxjs/toolkit"
 import { useMemo } from "react"
 import { useDispatch } from "react-redux"
+import { rootThunks } from "../store"    //все thunk
 
-import { rootActions } from './../store' //все экшены
-
-export const useActions = () => {
+export const useThunk = () => {
     const dispatch = useDispatch()
 
     return useMemo(() => {
-        return bindActionCreators(rootActions, dispatch)
+        return bindActionCreators(rootThunks, dispatch)
     }, [dispatch])
 }
-
 

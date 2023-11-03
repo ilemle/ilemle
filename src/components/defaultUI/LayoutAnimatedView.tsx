@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleProp, ViewStyle } from "react-native";
-import Animated, { FadeInDown, FadeOutDown } from "react-native-reanimated";
+import Animated, { FadeInDown, FadeOutDown, SharedTransition } from "react-native-reanimated";
 import { enteringType, exitingType } from "../../types/animationTypes";
 import { useTypedSelector } from "../../hooks";
 
@@ -10,6 +10,7 @@ interface IAnimatedView {
     entering?: enteringType
     exiting?: exitingType
     sharedTransitionTag?: string | undefined,
+    sharedTransitionStyle?: SharedTransition | undefined
 }
 
 export const LayoutAnimatedView: React.FC<IAnimatedView> = (props: IAnimatedView): JSX.Element => {
@@ -22,15 +23,17 @@ export const LayoutAnimatedView: React.FC<IAnimatedView> = (props: IAnimatedView
         entering = FadeInDown.delay(100).duration(1000).springify(),
         exiting = FadeOutDown.delay(100).duration(1000).springify(),
         sharedTransitionTag,
+        sharedTransitionStyle,
     } = props
 
     return (
 
         <Animated.View
-            sharedTransitionTag={sharedTransitionTag}
             entering={layoutAnimationEnabled ? entering : undefined}
             exiting={layoutAnimationEnabled ? exiting : undefined}
             style={style}
+            sharedTransitionTag={sharedTransitionTag}
+            sharedTransitionStyle={sharedTransitionStyle}
         >
             {children}
         </Animated.View>

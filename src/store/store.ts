@@ -12,9 +12,11 @@ import {
 } from 'redux-persist'
 
 import { appSlice } from './app/app.slice'
+import { artSlice } from './arts/arts.slice'
 
 const rootReducer = combineReducers({
-  app: appSlice.reducer
+  app: appSlice.reducer,
+  arts: artSlice.reducer,
 })
 
 const persistConfig = {
