@@ -51,7 +51,7 @@ export const ArtDetailScreen: React.FC<ArtDetailScreenProps> = ({ route }): JSX.
 
                 <Animated.View
                     style={{ marginTop: 20, marginHorizontal: 10 }}
-                    // sharedTransitionTag={`image-${id}`}
+                    sharedTransitionTag={`image-${id}`}
                 >
                     <Image
 

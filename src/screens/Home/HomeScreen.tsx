@@ -69,7 +69,7 @@ export const HomeScreen: React.FC = (): JSX.Element => {
                         >
                             <LayoutAnimatedView
                                 style={{ marginTop: 20, }}
-                            // sharedTransitionTag={`image-${item.id}`}
+                            sharedTransitionTag={`image-${item.id}`}
                             >
                                 <Image
 
